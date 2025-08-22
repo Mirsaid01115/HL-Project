@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<head>
+    <style>
+#form-container{
+    width:320px;
+    padding: 25px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+}
+label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+button{
+    background-color: bisque;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+body{
+    font-family: sans-serif;
+    background-image: url('urban-vintage-78A265wPiO4-unsplash.jpg');
+}
+#results-screen{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+
+}
+.left-info, .right-info, .center-info{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    width:30%;
+}
+.center-info{
+    align-items: center;
+    justify-content: center;
+}
+@keyframes fadeInBox {
+    from{
+        opacity:0;
+        transform: translateY(20px);
+    }to{
+        opacity:1;
+        transform:translateY(0);
+    }}
+.box, .center-box{
+    background-color: rgba(255, 255, 255, .7);
+    padding: 15px;
+    border-radius: 10px;
+    text-align:center;
+    box-shadow: 0 0 5px rgba(0,0,0,1);
+    animation: fadeInBox 1s ease-out forwards;
+}
+.Vitaminbox{
+    position: fixed;
+    bottom: 20px;
+    right:20px;
+    background-color: rgba(255, 255, 255, .7);
+    padding: 15px;
+    border-radius: 30px;
+    box-shadow: 0 0 5px rgba(0,0,0,1);
+    animation: fadeInBox 1s ease-out forwards;
+    overflow: auto;
+}
+.VitaminboxTable{
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+
+}
+.Vitaminbox th, .Vitaminbox td{
+    padding: 2px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+}
+#form-screen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin:0;
+    color: rgb(6, 35, 8);
+}
+input[type="number"],
+select{
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+    </style>
+
+
+<title>HL</title>
+<h1><center>HL</center></h1>
+</head>
+
+<body>
+<script src="Interaction.js"></script>
+<div id="output"></div>
+<div id="form-screen">
+<div id="form-container">
+<label for="Weight">Current Weight (lbs):</label>
+<input type="number" id="Weight">
+<label for="Height">Height (inches):</label>
+<input type="number" id="Height">
+<label for="Bench">Bench-Press(max) (lbs):</label>
+<input type="number" id="Bench">
+<label for="Squat">Squat(max) (lbs):</label>
+<input type="number" id="Squat">
+<label for="Rows">Rows(barbell or Dumbell(max)) (lbs):</label>
+<input type="number" id="Rows">
+<label for="Neck">Neck (inches):</label>
+<input type="number" id="Neck">
+<label for="Waist">Waist (inches):</label>
+<input type="number" id="Waist">
+<label for="Age">Age:</label>
+<input type="number" id="Age">
+<label for="Activity">Current Activity:</label>
+<select id="Activity">
+    <option value="Not-Active">Not Active</option>
+    <option value="Moderately-Active">Moderately Active</option>
+    <option value="Very-Active">Very Active</option>
+</select>
+<label for="Goal Physique">Physique Goal:</label>
+<select id="Goal">
+    <option value="Lean">Lean -10 lbs</option>
+    <option value="Maintain">Maintain 0 lbs</option>
+    <option value="Bulk">Bulk +10 lbs</option>
+</select>
+<input type="Button" value="Submit" onclick="SubmitData()">
+</div>
+</div>
+<div id="results-screen" style="display:none;">
+    <div class="left-info">
+        <div class="box">Protein To Take: <span id="Protein-output"></span></div>
+        <div class="box">Carbs To Take: <span id="Carbs-output"></span></div>
+        <div class="box">Sodium To Take: <span id="Sodium-output"></span></div>
+        <div class="box">Sugar(For Energy): <span id="Sugar-output"></span></div>
+    </div>
+    <div class="center-info">
+        <div class="center-box">Weight: <span id="Weight-output"></span></div>
+        <div class="center-box bfp">Body Fat:  <span id="bfp-output"></span></div>
+    </div>
+    <div class="right-info">
+        <div class="box"> Current Max Bench: <span id="Bench-output"></span></div>
+        <div class="box">Current Max Squat: <span id="Squat-output"></span></div>
+        <div class="box">Current Max Rows: <span id="Rows-output"></span></div>
+        
+
+    </div>
+    <div class="Vitaminbox">
+    <h4>Vitamin Tracker</h4>
+    <div > <span id="Vitamins-output"></span></div>
+    <table id="Vitamin-Table" class="VitaminTable">
+        <tr>
+            <th>Vitamin</th>
+            <th>Daily</th>
+            <th>Taken</th>
+            <th>Left</th>
+            <th>Log</th>
+        </tr>
+        <tr id="vitamin-c-row">
+            <td>Vitamin C</td>
+            <td>90 mg</td>
+            <td><span id="vitamin-c-taken">0</span></td>
+            <td><span id="vitamin-c-left">90</span></td>
+            <td>
+            <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" id="vitamin-c-amount" placeholder="Amount" style="width: 60px; padding: 4px;">
+            <div style="margin-top: 1px;">
+            <button onclick="logVitamin('vitamin c')" style="padding: 4px;">Log</button>
+            </div>
+        </td>
+        </tr>
+        <tr id="vitamin-d-row">
+            <td>Vitamin D</td>
+            <td>20 mcg</td>
+            <td><span id="vitamin-d-taken">0</span></td>
+            <td><span id="vitamin-d-left">20</span></td>
+            <td>
+            <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" id="vitamin-d-amount" placeholder="Amount" style="width: 60px; padding: 4px;">
+            <div style="margin-top: 1px;">
+            <button onclick="logVitamin('vitamin d')" style="padding: 4px;">Log</button>
+            </div>
+        </td>
+        </tr>
+<tr id="vitamin-b12-row">
+            <td>Vitamin B12</td>
+            <td>2.4 mcg</td>
+            <td><span id="vitamin-b12-taken">0</span></td>
+            <td><span id="vitamin-b12-left">2.4</span></td>
+            <td>
+            <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" id="vitamin-b12-amount" placeholder="Amount" style="width: 60px; padding: 4px;">
+            <div style="margin-top: 1px;">
+            <button onclick="logVitamin('vitamin b12')" style="padding: 4px;">Log</button>
+            </div>
+        </td>
+        </tr><tr id="vitamin-a-row">
+            <td>Vitamin A</td>
+            <td>900 mcg</td>
+            <td><span id="vitamin-a-taken">0</span></td>
+            <td><span id="vitamin-a-left">900</span></td>
+            <td>
+            <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" id="vitamin-a-amount" placeholder="Amount" style="width: 60px; padding: 4px;">
+            <div style="margin-top: 1px;">
+            <button onclick="logVitamin('vitamin a')" style="padding: 4px;">Log</button>
+            </div>
+        </td>
+        </tr><tr id="vitamin-e-row">
+            <td>Vitamin E</td>
+            <td>15 mg</td>
+            <td><span id="vitamin-e-taken">0</span></td>
+            <td><span id="vitamin-e-left">15</span></td>
+            <td>
+            <div style="display: flex; align-items: center; gap: 5px;">
+            <input type="number" id="vitamin-e-amount" placeholder="Amount" style="width: 60px; padding: 4px;">
+            <div style="margin-top: 1px;">
+            <button onclick="logVitamin('vitamin e')" style="padding: 4px;">Log</button>
+            </div>
+        </td>
+        </tr>
+        </table>
+</div>
+
+</body>
